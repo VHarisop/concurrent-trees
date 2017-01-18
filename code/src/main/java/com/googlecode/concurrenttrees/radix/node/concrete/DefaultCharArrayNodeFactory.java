@@ -44,6 +44,26 @@ import java.util.List;
  */
 public class DefaultCharArrayNodeFactory implements NodeFactory {
 
+    private final boolean checkDuplicateEdges;
+
+    /**
+	 * Creates a new DefaultCharArrayNodeFactory.
+	 *
+	 * @param checkDuplicateEdges a flag that specifies if checking for
+	 * duplicate edges should occur on node creation
+	 */
+    public DefaultCharArrayNodeFactory(boolean checkDuplicateEdges) {
+        this.checkDuplicateEdges = checkDuplicateEdges;
+	}
+
+	/**
+	 * Creates a new DefaultCharArrayNodeFactory with duplicate edge
+	 * checking enabled by default on node creation.
+	 */
+    public DefaultCharArrayNodeFactory() {
+        this(true);
+    }
+
     @Override
     public Node createNode(CharSequence edgeCharacters, Object value, List<Node> childNodes, boolean isRoot) {
         if (edgeCharacters == null) {

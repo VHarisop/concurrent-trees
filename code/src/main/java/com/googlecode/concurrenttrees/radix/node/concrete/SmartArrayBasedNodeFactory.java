@@ -30,8 +30,30 @@ import java.util.List;
  */
 public class SmartArrayBasedNodeFactory implements NodeFactory {
 
-    final NodeFactory charArrayNodeFactory = new DefaultCharArrayNodeFactory();
-    final NodeFactory byteArrayNodeFactory = new DefaultByteArrayNodeFactory();
+    final NodeFactory charArrayNodeFactory;
+    final NodeFactory byteArrayNodeFactory;
+
+    private final boolean checkDuplicateEdges;
+
+    /**
+     * Creates a new SmartArrayBasedNodeFactory.
+     *
+     * @param checkDuplicateEdges a flag indicating if checking for duplicate
+     * edges should occur on node creation
+     */
+    public SmartArrayBasedNodeFactory(boolean checkDuplicateEdges) {
+        this.checkDuplicateEdges = checkDuplicateEdges;
+        charArrayNodeFactory = new DefaultCharArrayNodeFactory(checkDuplicateEdges);
+        byteArrayNodeFactory = new DefaultByteArrayNodeFactory(checkDuplicateEdges);
+    }
+
+    /**
+     * Creates a new SmartArrayBasedNodeFactory with duplicate edge checking
+     * enabled by default on node creation.
+     */
+    public SmartArrayBasedNodeFactory() {
+        this(true);
+    }
 
     @Override
     public Node createNode(CharSequence edgeCharacters, Object value, List<Node> childNodes, boolean isRoot) {

@@ -45,6 +45,26 @@ import java.util.List;
  */
 public class DefaultCharSequenceNodeFactory implements NodeFactory {
 
+    private final boolean checkDuplicateEdges;
+
+    /**
+     * Creates a new DefaultCharSequenceNodeFactory.
+     *
+     * @param checkDuplicateEdges a flag indicating if checking for duplicate
+     * edges should occur on node creation
+     */
+    public DefaultCharSequenceNodeFactory(boolean checkDuplicateEdges) {
+        this.checkDuplicateEdges = checkDuplicateEdges;
+    }
+
+    /**
+     * Creates a new DefaultCharSequenceNodeFactory with duplicate edge
+     * checking enabled by default on node creation.
+     */
+    public DefaultCharSequenceNodeFactory() {
+        this(true);
+    }
+
     @Override
     public Node createNode(CharSequence edgeCharacters, Object value, List<Node> childNodes, boolean isRoot) {
         if (edgeCharacters == null) {
