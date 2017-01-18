@@ -76,7 +76,8 @@ public class DefaultCharSequenceNodeFactory implements NodeFactory {
         if (childNodes == null) {
             throw new IllegalStateException("The childNodes argument was null");
         }
-        NodeUtil.ensureNoDuplicateEdges(childNodes);
+        if (checkDuplicateEdges)
+            NodeUtil.ensureNoDuplicateEdges(childNodes);
 
 
         if (childNodes.isEmpty()) {
